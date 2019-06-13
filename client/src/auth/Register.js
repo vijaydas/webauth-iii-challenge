@@ -1,16 +1,17 @@
 import React from "react";
 import axios from "axios";
 
-class Login extends React.Component {
+class Register extends React.Component {
   state = {
-    username: "student",
-    password: "hired"
+    username: "",
+    password: "",
+    department: ""
   };
 
   render() {
     return (
       <>
-        <h2>Login</h2>
+        <h2>Register</h2>
         <form onSubmit={this.submitForm}>
           <div>
             <label htmlFor="username" />
@@ -31,8 +32,20 @@ class Login extends React.Component {
               type="password"
             />
           </div>
+
+
           <div>
-            <button type="submit">Login</button>
+            <label htmlFor="department" />
+            <input
+              id="department"
+              onChange={this.handleChange}
+              value={this.state.department}
+              type="text"
+            />
+          </div>
+
+          <div>
+            <button type="submit">Register</button>
           </div>
           </form>
           
@@ -41,27 +54,26 @@ class Login extends React.Component {
   }
 
   handleChange = event => {
-    const { id, value } = event.target;
-    this.setState({ [id]: value });
+    //const {  } = event.target;
+    this.setState({[event.target.id]: event.target.value});
   };
 
   submitForm = event => {
     event.preventDefault();
-    const endpoint = "http://localhost:5000/api/auth/login";
-
+    const endpoint = "http://localhost:5000/api/auth/register";
     axios
       .post(endpoint, this.state)
       .then(res => {
         localStorage.setItem('jwt', res.data.token);
         this.props.history.push('users')
-        console.log('logged it')
+        console.log('registered')
       })
       .catch(err => {
-        console.log("login error", err);
+        console.log("registration error", err);
     });
   };
 
 
 }
 
-export default Login;
+export default Register;
