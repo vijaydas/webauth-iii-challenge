@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 class Login extends React.Component {
 
@@ -42,7 +43,17 @@ class Login extends React.Component {
   handleChange = event => {
       const { id, value } = event.target;
       this.setState({ [id]: value});
+  };
+
+  submitForm = event => {
+      event.preventDefault();
+      const endpoint = 'http://localhost:5000/api/auth/login';
+      axios.post(endpoint, )
+
   }
+
+
+
 }
 
 export default Login;
