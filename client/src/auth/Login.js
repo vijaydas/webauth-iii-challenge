@@ -53,6 +53,8 @@ class Login extends React.Component {
       .post(endpoint, this.state)
       .then(res => {
         localStorage.setItem('jwt', res.data.token);
+        this.props.history.push('users')
+        console.log('logged it')
       })
       .catch(err => {
         console.log("login error", err);
